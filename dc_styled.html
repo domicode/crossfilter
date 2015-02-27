@@ -189,13 +189,13 @@
 
   dc.renderAll();
 
-  // // Update the chart on click
-  // $('#chart-ring-year').on('click', function(){
-  //   var minDate = dateDim.bottom(1)[0].date;
-  //   var maxDate = dateDim.top(1)[0].date;
-  //   hitslineChart.x(d3.time.scale().domain([minDate,maxDate]));
-  //   hitslineChart.redraw();
-  // });
+  // Update the chart on click
+  $('#chart-ring-year').on('click', function(){
+    var minDate = dateDim.bottom(1)[0].date;
+    var maxDate = dateDim.top(1)[0].date;
+    hitslineChart.x(d3.time.scale().domain([minDate,maxDate]));
+    hitslineChart.redraw();
+  });
 
 
   print_filter("data");

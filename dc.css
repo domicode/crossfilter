@@ -204,6 +204,7 @@ div.dc-chart {
 
 .dc-legend {
     font-size: 11px;
+    /*transform: rotate(30deg);*/
 }
 
 .dc-legend-item {

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>dc js library TEST</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js" type="text/javascript"></script>
+  <script type="text/javascript" src="d3.js"></script>
+  <script type="text/javascript" src="crossfilter.js"></script>
+  <script type="text/javascript" src="dc_v2.js"></script>
+  <link rel="stylesheet" type="text/css" href="dc.css" media="screen">
+</head>
+<body>
+
+<div id="chart-ring-year"></div>
+<div id="chart-ring-month"></div>
+<div id="chart-ring-status"></div>
+<div id="chart-line-hitsperday"></div>
+
+<table id="dc-data-table">
+  <thead>
+    <tr class="header">
+      <th>Day</th>
+      <th>Turnover</th>
+      <th>Direct costs</th>
+      <th>Gross margin</th>
+    </tr>
+  </thead>
+</table>
+
+<script type="text/javascript">
+
+  var data = [{"date":"2014-09-15 09:52:10 +0200","turnover":933,"direct_costs":733},{"date":"2014-03-17 23:19:19 +0100","turnover":29,"direct_costs":0},{"date":"2014-01-29 16:21:05 +0100","turnover":761,"direct_costs":591},{"date":"2014-12-03 07:27:11 +0100","turnover":378,"direct_costs":245},{"date":"2014-11-12 11:36:49 +0100","turnover":426,"direct_costs":335},{"date":"2014-01-22 04:32:46 +0100","turnover":404,"direct_costs":327},{"date":"2014-04-21 14:53:02 +0200","turnover":579,"direct_costs":419},{"date":"2014-05-18 12:05:49 +0200","turnover":12,"direct_costs":0},{"date":"2014-02-14 06:41:33 +0100","turnover":818,"direct_costs":678},{"date":"2014-01-24 00:22:18 +0100","turnover":161,"direct_costs":84},{"date":"2014-07-13 02:06:34 +0200","turnover":395,"direct_costs":244},{"date":"2014-06-28 23:15:17 +0200","turnover":830,"direct_costs":651},{"date":"2014-12-11 18:48:16 +0100","turnover":206,"direct_costs":163},{"date":"2014-02-26 16:24:33 +0100","turnover":666,"direct_costs":484},{"date":"2014-04-13 23:06:24 +0200","turnover":466,"direct_costs":338},{"date":"2014-08-20 09:58:17 +0200","turnover":205,"direct_costs":168},{"date":"2014-03-18 02:49:04 +0100","turnover":816,"direct_costs":655},{"date":"2014-11-29 00:12:21 +0100","turnover":166,"direct_costs":82},{"date":"2014-04-09 06:09:21 +0200","turnover":695,"direct_costs":489},{"date":"2014-07-19 07:23:35 +0200","turnover":849,"direct_costs":644},{"date":"2014-12-08 08:11:53 +0100","turnover":915,"direct_costs":742},{"date":"2014-02-26 14:38:54 +0100","turnover":410,"direct_costs":322},{"date":"2014-05-31 08:01:07 +0200","turnover":620,"direct_costs":486},{"date":"2014-05-26 12:19:15 +0200","turnover":526,"direct_costs":403},{"date":"2014-09-27 20:44:00 +0200","turnover":488,"direct_costs":338},{"date":"2014-04-09 20:10:14 +0200","turnover":372,"direct_costs":241},{"date":"2014-09-11 05:36:45 +0200","turnover":752,"direct_costs":561},{"date":"2014-05-07 05:19:19 +0200","turnover":186,"direct_costs":81},{"date":"2014-11-09 10:45:56 +0100","turnover":602,"direct_costs":481},{"date":"2014-09-16 04:47:26 +0200","turnover":84,"direct_costs":0},{"date":"2014-05-01 23:39:40 +0200","turnover":838,"direct_costs":656},{"date":"2014-05-01 12:04:01 +0200","turnover":997,"direct_costs":742},{"date":"2014-08-24 15:54:14 +0200","turnover":670,"direct_costs":489},{"date":"2014-05-18 02:33:32 +0200","turnover":604,"direct_costs":494},{"date":"2014-08-12 23:04:20 +0200","turnover":426,"direct_costs":334},{"date":"2014-07-21 08:19:06 +0200","turnover":620,"direct_costs":500},{"date":"2014-12-13 11:37:17 +0100","turnover":945,"direct_costs":749},{"date":"2014-07-11 12:26:55 +0200","turnover":512,"direct_costs":417},{"date":"2014-02-06 04:55:40 +0100","turnover":909,"direct_costs":723},{"date":"2014-05-24 05:31:12 +0200","turnover":166,"direct_costs":82},{"date":"2014-12-21 02:43:35 +0100","turnover":105,"direct_costs":82},{"date":"2014-04-17 02:22:58 +0200","turnover":628,"direct_costs":489},{"date":"2014-11-08 17:10:43 +0100","turnover":247,"direct_costs":160},{"date":"2014-07-03 15:42:46 +0200","turnover":903,"direct_costs":737},{"date":"2014-12-12 01:06:48 +0100","turnover":264,"direct_costs":167},{"date":"2014-08-26 06:30:39 +0200","turnover":520,"direct_costs":424},{"date":"2014-12-01 23:06:32 +0100","turnover":449,"direct_costs":327},{"date":"2014-04-08 13:49:36 +0200","turnover":469,"direct_costs":338},{"date":"2014-01-01 23:45:00 +0100","turnover":437,"direct_costs":321},{"date":"2014-05-06 02:44:21 +0200","turnover":973,"direct_costs":764},{"date":"2014-05-19 16:05:29 +0200","turnover":39,"direct_costs":0},{"date":"2014-09-04 21:34:01 +0200","turnover":285,"direct_costs":164},{"date":"2014-03-30 18:20:04 +0200","turnover":621,"direct_costs":481},{"date":"2014-02-19 03:03:12 +0100","turnover":681,"direct_costs":492},{"date":"2014-08-15 10:55:36 +0200","turnover":581,"direct_costs":414},{"date":"2014-06-26 12:27:21 +0200","turnover":460,"direct_costs":334},{"date":"2014-07-21 12:11:12 +0200","turnover":725,"direct_costs":568},{"date":"2014-04-04 19:35:00 +0200","turnover":868,"direct_costs":641},{"date":"2014-12-11 19:26:02 +0100","turnover":312,"direct_costs":245},{"date":"2014-04-12 18:21:06 +0200","turnover":244,"direct_costs":165},{"date":"2014-09-23 13:47:04 +0200","turnover":338,"direct_costs":247},{"date":"2014-04-12 11:39:40 +0200","turnover":124,"direct_costs":84},{"date":"2014-05-15 22:47:22 +0200","turnover":310,"direct_costs":245},{"date":"2014-05-18 19:57:47 +0200","turnover":13,"direct_costs":0},{"date":"2014-12-01 15:19:53 +0100","turnover":217,"direct_costs":162},{"date":"2014-02-25 16:35:01 +0100","turnover":565,"direct_costs":422},{"date":"2014-02-06 00:23:48 +0100","turnover":330,"direct_costs":252},{"date":"2014-12-09 17:15:14 +0100","turnover":895,"direct_costs":644},{"date":"2014-11-16 04:59:37 +0100","turnover":385,"direct_costs":249},{"date":"2014-11-30 21:42:49 +0100","turnover":790,"direct_costs":575},{"date":"2014-04-25 20:33:35 +0200","turnover":651,"direct_costs":489},{"date":"2014-07-09 00:36:36 +0200","turnover":295,"direct_costs":160},{"date":"2014-01-18 16:17:21 +0100","turnover":622,"direct_costs":497},{"date":"2014-11-02 17:36:11 +0100","turnover":617,"direct_costs":491},{"date":"2014-07-10 18:52:02 +0200","turnover":99,"direct_costs":0},{"date":"2014-02-21 03:45:23 +0100","turnover":349,"direct_costs":248},{"date":"2014-05-24 12:39:45 +0200","turnover":144,"direct_costs":81},{"date":"2014-07-09 02:59:38 +0200","turnover":887,"direct_costs":679},{"date":"2014-11-23 09:34:21 +0100","turnover":392,"direct_costs":245},{"date":"2014-12-21 20:49:16 +0100","turnover":356,"direct_costs":251},{"date":"2014-08-01 12:36:49 +0200","turnover":876,"direct_costs":678},{"date":"2014-04-18 03:40:42 +0200","turnover":565,"direct_costs":418},{"date":"2014-05-14 11:53:01 +0200","turnover":903,"direct_costs":757},{"date":"2014-07-10 19:49:10 +0200","turnover":921,"direct_costs":748},{"date":"2014-12-08 15:06:51 +0100","turnover":378,"direct_costs":253},{"date":"2014-08-17 05:27:35 +0200","turnover":204,"direct_costs":161},{"date":"2014-07-04 17:13:10 +0200","turnover":884,"direct_costs":667},{"date":"2014-04-11 10:02:20 +0200","turnover":768,"direct_costs":573},{"date":"2014-12-07 16:46:19 +0100","turnover":642,"direct_costs":503},{"date":"2014-08-23 05:50:51 +0200","turnover":184,"direct_costs":82},{"date":"2014-09-12 23:31:51 +0200","turnover":553,"direct_costs":419},{"date":"2014-08-10 18:04:33 +0200","turnover":132,"direct_costs":84},{"date":"2014-03-21 06:52:35 +0100","turnover":245,"direct_costs":166},{"date":"2014-01-02 06:12:56 +0100","turnover":705,"direct_costs":564},{"date":"2014-10-12 03:17:26 +0200","turnover":952,"direct_costs":745},{"date":"2014-10-03 07:13:23 +0200","turnover":216,"direct_costs":167},{"date":"2014-03-28 19:51:01 +0100","turnover":7,"direct_costs":0},{"date":"2014-06-21 20:56:32 +0200","turnover":370,"direct_costs":254},{"date":"2014-05-12 14:49:27 +0200","turnover":948,"direct_costs":729},{"date":"2014-03-15 18:55:16 +0100","turnover":764,"direct_costs":586}];
+
+  var ndx = crossfilter(data);
+
+  // We parse the dates and put them into the right format
+  var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S %Z").parse;
+
+  data.forEach(function(d) {
+    d.date = parseDate(d.date);
+    d.Year = d.date.getFullYear();
+    d.month = d.date.getMonth() + 1;
+  });
+
+  // creating dimensions now with the parsed dates
+  var dateDim = ndx.dimension(function(d) { return d.date; });
+  var turnover = dateDim.group().reduceSum(function(d) { return d.turnover; });
+  var direct_costs = dateDim.group().reduceSum(function(d) { return d.direct_costs; });
+  var yearDim = ndx.dimension(function(d) { return +d.Year;  });
+  var year_total = yearDim.group().reduceSum(function(d) { return d.turnover; });
+  var monthDim = ndx.dimension(function(d) { return d.month; });
+  var month_total = monthDim.group().reduceSum(function(d) {return d.turnover; });
+
+  var minDate = dateDim.bottom(1)[0].date;
+  var maxDate = dateDim.top(1)[0].date;
+
+  function getValues(d){
+    var str=d.key.getDate() + "/" + (d.key.getMonth() + 1) + "/" + d.key.getFullYear()+"\n";
+    var key_filter = dateDim.filter(d.key).top(Infinity);
+    var total=0
+    key_filter.forEach(function(a) {
+        str+=a.status+": "+a.hits+" Hit(s)\n";
+        total+=a.hits;
+    });
+
+    str+="Total:"+total;
+    //remove filter so it doesn't effect the graphs,
+    //this is the only filter so we can do this
+    dateDim.filterAll();
+    return str;
+  }
+
+  // Line chart setup
+  var hitslineChart = dc.lineChart("#chart-line-hitsperday")
+  hitslineChart
+    .width(500).height(200)
+    .dimension(dateDim)
+    .group(direct_costs, "direct costs")
+    .stack(turnover, "turnover")
+    .renderArea(true)
+    .x(d3.time.scale().domain([minDate,maxDate]))
+    .brushOn(false)
+    .margins({ top: 10, left: 50, right: 10, bottom: 50 })
+    .title(function(d) { return getValues(d);} )
+    .renderTitle(false)
+    .legend(dc.legend().x(60).y(10).itemHeight(13).gap(5))
+    .renderlet(function (chart) { chart.selectAll("g.x text").attr('dx', '-30').attr('dy', '-7').attr('transform', "rotate(-90)"); })
+    .yAxisLabel("CHF")
+    .elasticY(false)
+    .elasticX(true);
+
+  // ring chart for months
+  var monthRingChart = dc.pieChart("#chart-ring-month")
+  monthRingChart
+    .width(1000).height(100)
+    .dimension(monthDim)
+    .group(month_total)
+    .radius(2)
+    .innerRadius(0)
+    .legend(dc.legend().x(10).y(20).itemHeight(30).gap(5).horizontal(true).legendWidth(900))
+    .renderLabel(false)
+
+  // Print the datatable with the data
+  var tableGroup = dateDim.group().reduce(
+    function reduceAdd(p, v) {
+      p[v.status] = v.turnover;
+      p["Year"] = v.Year;
+      return p;
+    },
+    function reduceRemove(p, v) {
+      p[v.status] = 0;
+      p["Year"] =v.Year;
+      return p;
+    },
+    function reduceInitial() { return {}; }
+  );
+
+
+  var datatable = dc.dataTable("#dc-data-table");
+  datatable
+    .dimension(dateDim)
+    .group(function(d) { return d.Year })
+    .columns([
+      function(d) { return d.date.getDate() + "/" + (d.date.getMonth()+1); },
+      function(d) { return d.turnover; },
+      function(d) { return d.direct_costs; },
+      function(d) { return d.turnover - d.direct_costs; }
+    ]);
+
+  dc.renderAll();
+
+  // Update the chart on click
+  $('#chart-ring-month').on('click', function(){
+    var minDate = dateDim.bottom(1)[0].date;
+    var maxDate = dateDim.top(1)[0].date;
+    hitslineChart.x(d3.time.scale().domain([minDate,maxDate]));
+    hitslineChart.redraw();
+  });
+
+
+  print_filter("data");
+
+  function print_filter(filter){
+    var f=eval(filter);
+    if (typeof(f.length) != "undefined") {}else{}
+    if (typeof(f.top) != "undefined") {f=f.top(Infinity);}else{}
+    if (typeof(f.dimension) != "undefined") {f=f.dimension(function(d) { return "";}).top(Infinity);}else{}
+    console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
+  }
+
+</script>
+
+</body>
+</html>
